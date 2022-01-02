@@ -1,11 +1,12 @@
+import Welcom from '../components/Welcom'
+
 const Header = () => {
     return (
-        <div>
-          <p>Home 0</p>
-          <p>Work</p>
-          <p>About</p>
-        </div>
+      <div>
+        <Welcom name="Welcom to our crazy application, my friend"/>
+      </div>
     );
   }
 
   export default Header;
+  
