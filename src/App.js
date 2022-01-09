@@ -5,10 +5,12 @@ import Footer from './components/footer';
 import ToDoList from './ToDo/ToDoList';
 import ToDoItem from './ToDo/ToDoItem';
 import React from 'react';
+import Context from './context';
+import AddToDo from './ToDo/AddToDo';
 
 function App() {
 
-  const [todos, setTodos] = React.useState ([
+  let [todos, setTodos] = React.useState ([
     {id:1, completed: false, title: 'Купить хлеба'},
     {id:2, completed: false, title: 'Купить масло'},
     {id:3, completed: false, title: 'Купить молоко'},
@@ -23,13 +25,34 @@ function App() {
     }));
   };
 
+  function removeToDo (id) {
+    setTodos(todos.filter(todo=>todo.id !==id));
+  }
+
+  function addTodo(title) {
+   setTodos(
+     todos.concat([
+       {
+         title,
+         id : Date.now(),
+         completed : false
+       }]))
+  }
+  
   return (
+    <Context.Provider value={{removeToDo}}>
     <div className="wrapper">
       <header> 
         <Header />
       </header> 
-      <ToDoList todos={todos} onToggle = {toggleTodo}/>
+      <AddToDo onCreate = {addTodo}/>
+      {
+        todos.length ? (<ToDoList todos={todos} onToggle = {toggleTodo}/>)
+         : (<p>No todos</p>)
+      }
+      
     </div>
+    </Context.Provider>
   );
 }
 
