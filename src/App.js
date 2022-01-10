@@ -8,6 +8,8 @@ import React , {useEffect} from 'react';
 import Context from './context';
 import AddToDo from './ToDo/AddToDo';
 import Loader from './loader';
+import Modal from './Modal/modal';
+
 
 function App() {
 
@@ -58,6 +60,7 @@ useEffect( () => {
       <header> 
         <Header />
       </header> 
+      <Modal />
       <AddToDo onCreate = {addTodo}/>
       {loading && <Loader /> }
       {
